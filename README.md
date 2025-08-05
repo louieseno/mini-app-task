@@ -1,23 +1,66 @@
-# Project Empty Template
+# Mini App Task
 
-This is a sample repository for you to start developing the task. Please carefully read the requirements of the task statement on the platform and follow best practices on how to use this repository.
-
-## Repository Readme
-
-- It should contain the project title
-- A one-sentence description about the project
-- It should include a list of languages, frameworks, and/or technologies used
-- How to install and use the project (instructions)
-- Don’t forget the .gitignore
-- If you are using a personal GitHub, mention that it is a challenge by Coodesh:
+A minimal Flutter application using BLoC and Clean Architecture to manage and display a list of items with favorite toggling.
 
 > This is a challenge by Coodesh
 
-## Completion and Submission Instructions
-1. Add the link to the repository with your solution to the task on the platform
-2. Check if the Readme is good and make the final commit to your repository
-3. Submit and wait for further instructions. If the test requires a video presentation, it will be possible to record it on the submission screen after adding the repository link. Good luck and success! =)
+## Features
 
-## Support
+- ✅ Display list of items with their creation date and colored tags.
+- ❤️ Toggle items as favorites.
+- 📦 Layered architecture with `data`, `domain`, and `presentation`.
+- 📡 Repository pattern with `ItemApi` abstraction.
+- 🚀 Flutter BLoC for state management.
 
-For questions about the process, send a message directly to a specialist in the platform chat.
+## Tech Stack
+
+- Flutter 3.29.0 (via FVM)
+- BLoC
+- Clean Architecture
+
+## Getting Started
+
+### Prerequisites
+
+- Install [Flutter](https://docs.flutter.dev/get-started/install)
+- Install [FVM](https://fvm.app/docs/getting_started/installation/)
+
+### Install Dependencies
+
+```bash
+fvm use 3.29.0
+fvm flutter pub get
+```
+
+### Run App
+
+```bash
+fvm flutter run
+```
+
+## Folder Structure
+
+```
+lib/
+├── core/             # Shared widgets
+├── data/             # Data layer (models, APIs)
+├── domain/           # Business logic layer(repositories)
+├── presentation/     # UI layer (pages, blocs)
+```
+
+## State Management
+
+Uses `flutter_bloc` for managing UI state via:
+
+- `ItemsBloc`: Fetch and update items list
+- Events: `getItems`, `saveFavorite`
+- States: `loading`, `success`, `failure`
+
+## Sample UI
+
+- List of items with their title and creation date
+- Favorite icon toggle (red heart for favorited)
+
+---
+
+Made with ❤️ using Clean Architecture principles.
