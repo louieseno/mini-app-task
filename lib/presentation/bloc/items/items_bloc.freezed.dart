@@ -55,11 +55,12 @@ extension ItemsEventPatterns on ItemsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetItems value)?  getItems,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetItems value)?  getItems,TResult Function( SaveFavorite value)?  saveFavorite,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case GetItems() when getItems != null:
-return getItems(_that);case _:
+return getItems(_that);case SaveFavorite() when saveFavorite != null:
+return saveFavorite(_that);case _:
   return orElse();
 
 }
@@ -77,11 +78,12 @@ return getItems(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetItems value)  getItems,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetItems value)  getItems,required TResult Function( SaveFavorite value)  saveFavorite,}){
 final _that = this;
 switch (_that) {
 case GetItems():
-return getItems(_that);}
+return getItems(_that);case SaveFavorite():
+return saveFavorite(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -95,11 +97,12 @@ return getItems(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetItems value)?  getItems,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetItems value)?  getItems,TResult? Function( SaveFavorite value)?  saveFavorite,}){
 final _that = this;
 switch (_that) {
 case GetItems() when getItems != null:
-return getItems(_that);case _:
+return getItems(_that);case SaveFavorite() when saveFavorite != null:
+return saveFavorite(_that);case _:
   return null;
 
 }
@@ -116,10 +119,11 @@ return getItems(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  getItems,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  getItems,TResult Function( String id)?  saveFavorite,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case GetItems() when getItems != null:
-return getItems();case _:
+return getItems();case SaveFavorite() when saveFavorite != null:
+return saveFavorite(_that.id);case _:
   return orElse();
 
 }
@@ -137,10 +141,11 @@ return getItems();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  getItems,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  getItems,required TResult Function( String id)  saveFavorite,}) {final _that = this;
 switch (_that) {
 case GetItems():
-return getItems();}
+return getItems();case SaveFavorite():
+return saveFavorite(_that.id);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -154,10 +159,11 @@ return getItems();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  getItems,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  getItems,TResult? Function( String id)?  saveFavorite,}) {final _that = this;
 switch (_that) {
 case GetItems() when getItems != null:
-return getItems();case _:
+return getItems();case SaveFavorite() when saveFavorite != null:
+return saveFavorite(_that.id);case _:
   return null;
 
 }
@@ -196,6 +202,72 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class SaveFavorite implements ItemsEvent {
+  const SaveFavorite(this.id);
+  
+
+ final  String id;
+
+/// Create a copy of ItemsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SaveFavoriteCopyWith<SaveFavorite> get copyWith => _$SaveFavoriteCopyWithImpl<SaveFavorite>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SaveFavorite&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'ItemsEvent.saveFavorite(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SaveFavoriteCopyWith<$Res> implements $ItemsEventCopyWith<$Res> {
+  factory $SaveFavoriteCopyWith(SaveFavorite value, $Res Function(SaveFavorite) _then) = _$SaveFavoriteCopyWithImpl;
+@useResult
+$Res call({
+ String id
+});
+
+
+
+
+}
+/// @nodoc
+class _$SaveFavoriteCopyWithImpl<$Res>
+    implements $SaveFavoriteCopyWith<$Res> {
+  _$SaveFavoriteCopyWithImpl(this._self, this._then);
+
+  final SaveFavorite _self;
+  final $Res Function(SaveFavorite) _then;
+
+/// Create a copy of ItemsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(SaveFavorite(
+null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 mixin _$ItemsState {

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Item {
 
- String get title; bool get favorite; DateTime get createdAt; ColoredTag get coloredTag;
+ String get id; String get title; bool get favorite; DateTime get createdAt; ColoredTag get coloredTag;
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ItemCopyWith<Item> get copyWith => _$ItemCopyWithImpl<Item>(this as Item, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.title, title) || other.title == title)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.coloredTag, coloredTag) || other.coloredTag == coloredTag));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.coloredTag, coloredTag) || other.coloredTag == coloredTag));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,title,favorite,createdAt,coloredTag);
+int get hashCode => Object.hash(runtimeType,id,title,favorite,createdAt,coloredTag);
 
 @override
 String toString() {
-  return 'Item(title: $title, favorite: $favorite, createdAt: $createdAt, coloredTag: $coloredTag)';
+  return 'Item(id: $id, title: $title, favorite: $favorite, createdAt: $createdAt, coloredTag: $coloredTag)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ItemCopyWith<$Res>  {
   factory $ItemCopyWith(Item value, $Res Function(Item) _then) = _$ItemCopyWithImpl;
 @useResult
 $Res call({
- String title, bool favorite, DateTime createdAt, ColoredTag coloredTag
+ String id, String title, bool favorite, DateTime createdAt, ColoredTag coloredTag
 });
 
 
@@ -65,9 +65,10 @@ class _$ItemCopyWithImpl<$Res>
 
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? favorite = null,Object? createdAt = null,Object? coloredTag = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? favorite = null,Object? createdAt = null,Object? coloredTag = null,}) {
   return _then(_self.copyWith(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,favorite: null == favorite ? _self.favorite : favorite // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,coloredTag: null == coloredTag ? _self.coloredTag : coloredTag // ignore: cast_nullable_to_non_nullable
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String title,  bool favorite,  DateTime createdAt,  ColoredTag coloredTag)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  bool favorite,  DateTime createdAt,  ColoredTag coloredTag)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
-return $default(_that.title,_that.favorite,_that.createdAt,_that.coloredTag);case _:
+return $default(_that.id,_that.title,_that.favorite,_that.createdAt,_that.coloredTag);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.title,_that.favorite,_that.createdAt,_that.coloredTag);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String title,  bool favorite,  DateTime createdAt,  ColoredTag coloredTag)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  bool favorite,  DateTime createdAt,  ColoredTag coloredTag)  $default,) {final _that = this;
 switch (_that) {
 case _Item():
-return $default(_that.title,_that.favorite,_that.createdAt,_that.coloredTag);}
+return $default(_that.id,_that.title,_that.favorite,_that.createdAt,_that.coloredTag);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -191,10 +192,10 @@ return $default(_that.title,_that.favorite,_that.createdAt,_that.coloredTag);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String title,  bool favorite,  DateTime createdAt,  ColoredTag coloredTag)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  bool favorite,  DateTime createdAt,  ColoredTag coloredTag)?  $default,) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
-return $default(_that.title,_that.favorite,_that.createdAt,_that.coloredTag);case _:
+return $default(_that.id,_that.title,_that.favorite,_that.createdAt,_that.coloredTag);case _:
   return null;
 
 }
@@ -206,9 +207,10 @@ return $default(_that.title,_that.favorite,_that.createdAt,_that.coloredTag);cas
 @JsonSerializable()
 
 class _Item implements Item {
-  const _Item({required this.title, required this.favorite, required this.createdAt, required this.coloredTag});
+  const _Item({required this.id, required this.title, required this.favorite, required this.createdAt, required this.coloredTag});
   factory _Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 
+@override final  String id;
 @override final  String title;
 @override final  bool favorite;
 @override final  DateTime createdAt;
@@ -227,16 +229,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.title, title) || other.title == title)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.coloredTag, coloredTag) || other.coloredTag == coloredTag));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.favorite, favorite) || other.favorite == favorite)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.coloredTag, coloredTag) || other.coloredTag == coloredTag));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,title,favorite,createdAt,coloredTag);
+int get hashCode => Object.hash(runtimeType,id,title,favorite,createdAt,coloredTag);
 
 @override
 String toString() {
-  return 'Item(title: $title, favorite: $favorite, createdAt: $createdAt, coloredTag: $coloredTag)';
+  return 'Item(id: $id, title: $title, favorite: $favorite, createdAt: $createdAt, coloredTag: $coloredTag)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
   factory _$ItemCopyWith(_Item value, $Res Function(_Item) _then) = __$ItemCopyWithImpl;
 @override @useResult
 $Res call({
- String title, bool favorite, DateTime createdAt, ColoredTag coloredTag
+ String id, String title, bool favorite, DateTime createdAt, ColoredTag coloredTag
 });
 
 
@@ -264,9 +266,10 @@ class __$ItemCopyWithImpl<$Res>
 
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? title = null,Object? favorite = null,Object? createdAt = null,Object? coloredTag = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? favorite = null,Object? createdAt = null,Object? coloredTag = null,}) {
   return _then(_Item(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,favorite: null == favorite ? _self.favorite : favorite // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,coloredTag: null == coloredTag ? _self.coloredTag : coloredTag // ignore: cast_nullable_to_non_nullable

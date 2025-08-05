@@ -14,4 +14,7 @@ class ItemRepository {
 
   /// Provides a [Stream] of all items.
   Stream<List<Item>> getItems() => _itemApi.getItems();
+
+  /// Updates the favorite status of an item.
+  Future<void> saveFavorite(Item item) => _itemApi.saveFavorite(item);
 }

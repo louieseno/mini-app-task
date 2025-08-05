@@ -17,6 +17,7 @@ enum ColoredTag {
 @freezed
 sealed class Item with _$Item {
   const factory Item({
+    required String id,
     required String title,
     required bool favorite,
     required DateTime createdAt,

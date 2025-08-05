@@ -7,6 +7,7 @@ part of 'item.dart';
 // **************************************************************************
 
 _Item _$ItemFromJson(Map<String, dynamic> json) => _Item(
+  id: json['id'] as String,
   title: json['title'] as String,
   favorite: json['favorite'] as bool,
   createdAt: DateTime.parse(json['createdAt'] as String),
@@ -14,6 +15,7 @@ _Item _$ItemFromJson(Map<String, dynamic> json) => _Item(
 );
 
 Map<String, dynamic> _$ItemToJson(_Item instance) => <String, dynamic>{
+  'id': instance.id,
   'title': instance.title,
   'favorite': instance.favorite,
   'createdAt': instance.createdAt.toIso8601String(),

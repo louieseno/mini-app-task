@@ -10,6 +10,7 @@ part 'items_bloc.freezed.dart';
 class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   ItemsBloc({required this.itemRepository}) : super(ItemsState.initial()) {
     on<GetItems>(_onGetItems);
+    on<SaveFavorite>(_onSaveFavorite);
   }
 
   @protected
@@ -28,5 +29,28 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
             error: Error.safeToString(error),
           ),
     );
+  }
+
+  Future<void> _onSaveFavorite(SaveFavorite event, Emitter<ItemsState> emit) async {
+    try {
+      final itemId = event.id;
+      final currentItem = state.items.firstWhere((item) => item.id == itemId);
+
+      // Toggle favorite value
+      final updatedItem = currentItem.copyWith(favorite: !currentItem.favorite);
+
+      // Save to repository
+      await itemRepository.saveFavorite(updatedItem);
+
+      // Optionally: update local list
+      final updatedItems =
+          state.items.map((item) {
+            return item.id == itemId ? updatedItem : item;
+          }).toList();
+
+      emit(state.copyWith(items: updatedItems));
+    } catch (error) {
+      emit(state.copyWith(status: ItemsStatus.failure, error: Error.safeToString(error)));
+    }
   }
 }

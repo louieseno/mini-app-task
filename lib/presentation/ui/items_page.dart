@@ -28,7 +28,20 @@ class _ItemList extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(title: AppText.title1(text: 'My Items')),
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AppText.title1(text: 'My Items'),
+            BlocBuilder<ItemsBloc, ItemsState>(
+              builder: (context, state) {
+                final count = state.items.where((item) => item.favorite).length;
+                return Text('❤️ $count', style: const TextStyle(fontSize: 16));
+              },
+            ),
+          ],
+        ),
+      ),
       body: BlocBuilder<ItemsBloc, ItemsState>(
         builder: (context, state) {
           switch (state.status) {
@@ -38,7 +51,28 @@ class _ItemList extends StatelessWidget {
               return AppError(error: state.error ?? 'Failed request');
             case ItemsStatus.success:
               if (state.items.isEmpty) return const AppEmpty();
-              return Text('Success');
+              return ListView.builder(
+                itemCount: state.items.length,
+                itemBuilder: (context, index) {
+                  final item = state.items[index];
+                  return ListTile(
+                    leading: IconButton(
+                      onPressed: () {
+                        context.read<ItemsBloc>().add(ItemsEvent.saveFavorite(item.id));
+                      },
+                      icon: Icon(
+                        item.favorite ? Icons.favorite : Icons.favorite_border,
+                        color: item.favorite ? Colors.red : null,
+                      ),
+                    ),
+                    title: Text(item.title),
+                    subtitle: Text(
+                      '${item.coloredTag.name.toUpperCase()} • ${item.createdAt.toLocal()}',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  );
+                },
+              );
           }
         },
       ),

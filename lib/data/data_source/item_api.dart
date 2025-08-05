@@ -12,6 +12,11 @@ abstract class ItemApi {
   /// {@endtemplate}
   Stream<List<Item>> getItems();
 
+  /// {@template ItemApi.saveFavorite}
+  /// Updates the favorite status of the given [Item].
+  /// {@endtemplate}
+  Future<void> saveFavorite(Item item);
+
   /// {@template ItemApi.close}
   /// Closes the client and frees up any resources.
   /// {@endtemplate}
