@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mini_app_task/domain/repository/item_repository.dart';
+import 'package:mini_app_task/presentation/ui/items_page.dart';
 
 class App extends StatelessWidget {
   const App({required this.itemRepository, super.key});
@@ -19,6 +20,6 @@ class _AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(body: Center(child: Text('Hello World!'))));
+    return MaterialApp(home: Scaffold(body: Center(child: ItemsPage())));
   }
 }

@@ -6,12 +6,12 @@ import 'package:mini_app_task/data/model/item.dart';
 /// A repository that orchestrate or handles `item` related requests.
 /// {@endtemplate}
 class ItemRepository {
-  /// {@macro NoteRepository}
+  /// {@macro ItemRepository}
   const ItemRepository({required ItemApi itemApi}) : _itemApi = itemApi;
 
   @protected
   final ItemApi _itemApi;
 
   /// Provides a [Stream] of all items.
-  Stream<List<Item>> getNotes() => _itemApi.getItems();
+  Stream<List<Item>> getItems() => _itemApi.getItems();
 }
